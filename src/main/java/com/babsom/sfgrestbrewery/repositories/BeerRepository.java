@@ -1,15 +1,17 @@
-package guru.springframework.sfgrestbrewery.repositories;
+package com.babsom.sfgrestbrewery.repositories;
 
 
-import guru.springframework.sfgrestbrewery.domain.Beer;
-import guru.springframework.sfgrestbrewery.domain.BeerStyleEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import com.babsom.sfgrestbrewery.domain.Beer;
+import com.babsom.sfgrestbrewery.domain.BeerStyleEnum;
 
 import java.util.UUID;
 
-
+@RepositoryRestResource(path="beer", collectionResourceRel = "biralar") /* collectionResourceRel ile response'ta dönen array'in adını belirleyebiliyorsun */
 public interface BeerRepository extends JpaRepository<Beer, UUID> {
     Page<Beer> findAllByBeerName(String beerName, Pageable pageable);
 

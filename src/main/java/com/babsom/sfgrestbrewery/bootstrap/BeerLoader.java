@@ -1,12 +1,13 @@
-package guru.springframework.sfgrestbrewery.bootstrap;
+package com.babsom.sfgrestbrewery.bootstrap;
 
-import guru.springframework.sfgrestbrewery.domain.Beer;
-import guru.springframework.sfgrestbrewery.domain.BeerStyleEnum;
-import guru.springframework.sfgrestbrewery.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import com.babsom.sfgrestbrewery.domain.Beer;
+import com.babsom.sfgrestbrewery.domain.BeerStyleEnum;
+import com.babsom.sfgrestbrewery.repositories.BeerRepository;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

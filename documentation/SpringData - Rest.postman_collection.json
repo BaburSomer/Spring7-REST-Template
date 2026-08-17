@@ -1,0 +1,31 @@
+{
+  "info": {
+    "_postman_id": "30bd2e9e-ef79-4bf5-8b89-57ae8604362e",
+    "name": "SpringData - Rest",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "11352509"
+  },
+  "item": [
+    {
+      "name": "List all beers",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/beers",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "beers"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

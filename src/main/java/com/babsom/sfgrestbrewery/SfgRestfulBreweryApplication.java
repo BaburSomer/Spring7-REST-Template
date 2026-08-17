@@ -1,4 +1,4 @@
-package guru.springframework.sfgrestbrewery;
+package com.babsom.sfgrestbrewery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
