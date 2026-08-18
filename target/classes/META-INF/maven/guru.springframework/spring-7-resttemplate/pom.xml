@@ -9,11 +9,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.babsom</groupId>
+    <groupId>guru.springframework</groupId>
     <artifactId>spring-7-resttemplate</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>spring-7-resttemplate</name>
+    <name>spring-6-resttemplate</name>
     <description>spring-7-resttemplate</description>
 
     <properties>
