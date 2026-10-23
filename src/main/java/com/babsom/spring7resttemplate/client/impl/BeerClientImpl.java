@@ -1,6 +1,7 @@
 package com.babsom.spring7resttemplate.client.impl;
 
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.boot.restclient.RestTemplateBuilder;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,8 @@ import tools.jackson.databind.JsonNode;
 public class BeerClientImpl implements BeerClient {
 
 	private static final String       LIST_BEERS = "/api/v1/beer";
+	private static final String       GET_BEER_BY_OID = "/api/v1/beer/{oid}";
+	
 	private final RestTemplateBuilder builder;
 
 	@Override
@@ -75,6 +78,11 @@ public class BeerClientImpl implements BeerClient {
 		ResponseEntity<BeerDTOPageImpl> response = restTemplate.getForEntity(componentsBuilder.toUriString(), BeerDTOPageImpl.class);
 
 		return response.getBody();
+	}
+
+	public BeerDTO getBeerByOid(UUID oid) {
+		RestTemplate restTemplate = builder.build();
+		return restTemplate.getForObject(GET_BEER_BY_OID, BeerDTO.class, oid);
 	}
 
 //	@Override
