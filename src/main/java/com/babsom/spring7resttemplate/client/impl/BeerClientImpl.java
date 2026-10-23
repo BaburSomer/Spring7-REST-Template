@@ -36,9 +36,9 @@ public class BeerClientImpl implements BeerClient {
 		responseAsJsonNode.getBody().findPath("content").asArray().forEach(node -> System.out.println(node.get("name").asString()));
 		
 		ResponseEntity<BeerDTOPageImpl> responseAsRestPage = restTemplate.getForEntity(BeerClientImpl.LIST_BEERS, BeerDTOPageImpl.class);
-//		responseAsJsonNode.getBody().findPath("content").asArray().forEach(node -> System.out.println(node.get("name").asString()));
+		responseAsJsonNode.getBody().findPath("content").asArray().forEach(node -> System.out.println(node.get("name").asString()));
 
-		return null;
+		return responseAsRestPage.getBody();
 	}
 	
 //	@Override
