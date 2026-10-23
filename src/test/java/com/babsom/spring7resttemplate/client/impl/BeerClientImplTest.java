@@ -2,6 +2,8 @@ package com.babsom.spring7resttemplate.client.impl;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +47,18 @@ class BeerClientImplTest {
 		BeerDTO beerByOid = client.getBeerByOid(beer.getOid());
 		
 		assertNotNull(beerByOid);
+	}
+	
+	@Test
+	void createBeer() {
+		BeerDTO newBeer = BeerDTO.builder().name("Efes Glutensiz")
+													  .price(new BigDecimal(50.99))
+													  .style(BeerStyle.PILSNER)
+													  .upc("45948743643786")
+													  .quantity(500)
+													  .build();
+		BeerDTO savedBeer = client.createBeer(newBeer);
+		
+		assertNotNull(savedBeer);
 	}
 }

@@ -1,6 +1,6 @@
 package com.babsom.spring7resttemplate.client.impl;
 
-import java.util.Map;
+import java.net.URI;
 import java.util.UUID;
 
 import org.springframework.boot.restclient.RestTemplateBuilder;
@@ -16,7 +16,6 @@ import com.babsom.spring7resttemplate.model.BeerDTOPageImpl;
 import com.babsom.spring7resttemplate.model.BeerStyle;
 
 import lombok.RequiredArgsConstructor;
-import tools.jackson.databind.JsonNode;
 
 @RequiredArgsConstructor
 @Service
@@ -83,6 +82,16 @@ public class BeerClientImpl implements BeerClient {
 	public BeerDTO getBeerByOid(UUID oid) {
 		RestTemplate restTemplate = builder.build();
 		return restTemplate.getForObject(GET_BEER_BY_OID, BeerDTO.class, oid);
+	}
+
+	public BeerDTO createBeer(BeerDTO newBeer) {
+		RestTemplate restTemplate = builder.build();
+		
+//		ResponseEntity response = restTemplate.postForEntity(LIST_BEERS, newBeer, BeerDTO.class); böyle header'ın içinden oid'yi ayıklaman gerekiyor. Onun yerine postF0rLocation kullan
+		
+		URI uri = restTemplate.postForLocation(LIST_BEERS, newBeer);
+		
+		return restTemplate.getForObject(uri.getPath(), BeerDTO.class);
 	}
 
 //	@Override
