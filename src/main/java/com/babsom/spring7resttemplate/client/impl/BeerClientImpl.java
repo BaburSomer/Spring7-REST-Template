@@ -84,14 +84,22 @@ public class BeerClientImpl implements BeerClient {
 		return restTemplate.getForObject(GET_BEER_BY_OID, BeerDTO.class, oid);
 	}
 
-	public BeerDTO createBeer(BeerDTO newBeer) {
+	public BeerDTO createBeer(BeerDTO beer) {
 		RestTemplate restTemplate = builder.build();
 		
 //		ResponseEntity response = restTemplate.postForEntity(LIST_BEERS, newBeer, BeerDTO.class); böyle header'ın içinden oid'yi ayıklaman gerekiyor. Onun yerine postF0rLocation kullan
 		
-		URI uri = restTemplate.postForLocation(LIST_BEERS, newBeer);
+		URI uri = restTemplate.postForLocation(LIST_BEERS, beer);
 		
 		return restTemplate.getForObject(uri.getPath(), BeerDTO.class);
+	}
+
+	public BeerDTO updateBeer(BeerDTO createdBeer) {
+		RestTemplate restTemplate = builder.build();
+		
+		restTemplate.put(GET_BEER_BY_OID, createdBeer, createdBeer.getOid());
+		
+		return getBeerByOid(createdBeer.getOid());
 	}
 
 //	@Override
