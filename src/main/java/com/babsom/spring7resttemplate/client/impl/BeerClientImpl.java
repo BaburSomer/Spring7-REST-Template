@@ -19,24 +19,23 @@ import tools.jackson.databind.JsonNode;
 @Service
 public class BeerClientImpl implements BeerClient {
 
-	private static final String BASE_URL = "http://localhost:8080";
 	private static final String LIST_BEERS = "/api/v1/beer";
 	private final RestTemplateBuilder builder;
     
 	@Override
-	public Page<BeerDTO> listBeers() {
+	public Page<BeerDTO> listBeers() {	
 		RestTemplate restTemplate = builder.build();
 
-		ResponseEntity<String> responseAsString = restTemplate.getForEntity(BeerClientImpl.BASE_URL + BeerClientImpl.LIST_BEERS, String.class);
+		ResponseEntity<String> responseAsString = restTemplate.getForEntity(BeerClientImpl.LIST_BEERS, String.class);
 		System.out.println(responseAsString.getBody());
 
-		ResponseEntity<Map> responseAsMap = restTemplate.getForEntity(BeerClientImpl.BASE_URL + BeerClientImpl.LIST_BEERS, Map.class);
+		ResponseEntity<Map> responseAsMap = restTemplate.getForEntity(BeerClientImpl.LIST_BEERS, Map.class);
 		responseAsMap.getBody().entrySet().forEach(entry -> System.out.println(entry.toString()));
 		
-		ResponseEntity<JsonNode> responseAsJsonNode = restTemplate.getForEntity(BeerClientImpl.BASE_URL + BeerClientImpl.LIST_BEERS, JsonNode.class);
+		ResponseEntity<JsonNode> responseAsJsonNode = restTemplate.getForEntity(BeerClientImpl.LIST_BEERS, JsonNode.class);
 		responseAsJsonNode.getBody().findPath("content").asArray().forEach(node -> System.out.println(node.get("name").asString()));
 		
-		ResponseEntity<BeerDTOPageImpl> responseAsRestPage = restTemplate.getForEntity(BeerClientImpl.BASE_URL + BeerClientImpl.LIST_BEERS, BeerDTOPageImpl.class);
+		ResponseEntity<BeerDTOPageImpl> responseAsRestPage = restTemplate.getForEntity(BeerClientImpl.LIST_BEERS, BeerDTOPageImpl.class);
 //		responseAsJsonNode.getBody().findPath("content").asArray().forEach(node -> System.out.println(node.get("name").asString()));
 
 		return null;
@@ -47,7 +46,7 @@ public class BeerClientImpl implements BeerClient {
 //		RestTemplate restTemplate = builder.build();
 //		
 //		ResponseEntity<PageImpl<BeerDTO>> response = restTemplate.exchange(
-//				"http://localhost:8080/api/v1/beer",
+//				BeerClientImpl.BASE_URL + BeerClientImpl.LIST_BEERS,
 //				HttpMethod.GET,
 //				null,
 //				new ParameterizedTypeReference<PageImpl<BeerDTO>>() {}
