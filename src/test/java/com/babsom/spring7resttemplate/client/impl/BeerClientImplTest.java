@@ -2,6 +2,7 @@ package com.babsom.spring7resttemplate.client.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
 
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.web.client.HttpClientErrorException;
 
 import com.babsom.spring7resttemplate.model.BeerDTO;
 import com.babsom.spring7resttemplate.model.BeerStyle;
@@ -78,5 +80,22 @@ class BeerClientImplTest {
 		BeerDTO updatedBeer = client.updateBeer(createdBeer);
 		
 		assertEquals(updatedBeer.getName(), newName);
+	}
+	
+	@Test
+	void deleteBeer() {
+		BeerDTO newBeer = BeerDTO.builder().name("Efes Glutensiz")
+				.price(new BigDecimal(50.99))
+				.style(BeerStyle.PILSNER)
+				.upc("45948743643786")
+				.quantity(500)
+				.build();
+		BeerDTO createdBeer = client.createBeer(newBeer);
+		
+		client.deleteBeer(createdBeer.getOid());
+		
+		assertThrows(HttpClientErrorException.class, () -> {
+			client.getBeerByOid(createdBeer.getOid());
+		}, "Beer with OID: <" + createdBeer.getOid() +"> is found!");
 	}
 }
